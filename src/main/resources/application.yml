@@ -1,0 +1,55 @@
+server:
+  port: 8088
+---
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+      url: jdbc:mysql:///jobdata?characterEncoding=utf8&serverTimezone=GMT%2B8
+      username: root
+      password: 123456
+      hikari:
+        maximum-pool-size: 5
+        driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+---
+diboot:
+  core:
+    # 是否初始化，默认true自动安装SQL
+    init-sql: false
+  iam:
+    # token过期时间（分），默认为60分钟
+    token-expires-minutes: 60
+    # Shiro的匿名urls，用逗号分隔
+    anon-urls: /auth/**
+    # 是否开启权限检查，默认true。改为false后结合anno-urls=/**配置，可忽略权限检查，便于开发环境调试
+    enable-permission-check: true
+    token-header-key: authorization
+    init-sql: false
+
+#  devtools:
+#    # 注释信息
+#    codes-author: 刘长卿
+#    codes-version: 1.0
+#    # 代码路径
+#    output-path: job-hunt-system-backend-diboot/src/main/java/com/example/dibootdemo
+#    output-path-entity: job-hunt-system-backend-diboot/src/main/java/com/example/dibootdemo/entity
+#    output-path-mapper: job-hunt-system-backend-diboot/src/main/java/com/example/dibootdemo/mapper
+#    output-path-service: job-hunt-system-backend-diboot/src/main/java/com/example/dibootdemo/service
+#    output-path-service-impl: job-hunt-system-backend-diboot/src/main/java/com/example/dibootdemo/service/impl
+#    output-path-controller: job-hunt-system-backend-diboot/src/main/java/com/example/dibootdemo/controller
+#    output-path-vo: job-hunt-system-backend-diboot/src/main/java/com/example/dibootdemo/controller/vo
+#    output-path-dto: job-hunt-system-backend-diboot/src/main/java/com/example/dibootdemo/controller/dto
+#    output-path-sql: job-hunt-system-backend-diboot/src/main/resources
+#    enable-lombok: true
+#    generate-mapper-xml: false
+#    output-path-admin-ui: D:\Code\VueProjects\diboot-admin
+---
+mybatis-plus:
+  configuration:
+    # MybatisPlus的日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+---
